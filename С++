@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <Windows.h>
+using namespace std;
+
+int main() {
+  SetConsoleCP(1251);
+  SetConsoleOutputCP(1251);
+  setlocale(LC_ALL, "");
+
+  cout << "Игра в 'Виселицу' " << endl;
+  string slovo, otgad = "_";
+  cout << "Загадайте слово!" << endl;
+  getline(cin, slovo);
+  cout << "Длина загаданного слова = " << slovo.size() << endl;
+
+  size_t sizik = slovo.size();
+  int att = 6;
+  for (int i = 0; i < sizik - 1; i++)
+    otgad += '_';
+
+  while (att) {
+    int chet = 0;
+    cout << otgad << endl;
+    cout << "Осталось попыток = " << att << endl;
+    cout << "Введите букву! ";
+    char c;
+    cin >> c;
+    for (int i = 0; i < slovo.size(); i++) {
+      if (slovo[i] == c) {
+        otgad[i] = c;
+        chet += 1;
+      }
+    }
+    if (chet == 0) att--;
+    if (otgad.find('_', 0) == -1) break;
+  }
+
+  if (att)
+    cout << "Вы отгадали слово:  " << otgad << endl;
+  else cout << "Вы проиграли! Кол-во попыток = 0";
+  return 0;
+}
